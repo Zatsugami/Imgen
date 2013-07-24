@@ -1,0 +1,20 @@
+{
+    "name": "zatsugami/imgen",
+    "description": "Flexible inline image manipulation tool",
+    "license": "WTFPL",
+    "authors": [
+        {
+            "name": "Sylwester Kardziejonek",
+            "email": "sylwester.kardziejonek@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "intervention/image": "1.4.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Zatsugami\\Imgen": "src/"
+        }
+    }
+}
