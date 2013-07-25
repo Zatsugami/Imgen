@@ -58,9 +58,9 @@ use \Zatsugami\Imgen\Processors\Intervention;
 Imgen::instance()
 # Configure image groups
 ->setGroups([
-	# Default group MUST be defined
+    # Default group MUST be defined
     'default' => [
-    	# Paths are relative to webRoot config, this option does not need to be an array
+        # Paths are relative to webRoot config, this option does not need to be an array
         'look_in' => ['uploads/images'],
         # {~} are placeholders for processing params, you can read about them later,
         # but they should be intuitive
@@ -140,14 +140,58 @@ Our image call would look like this in this case:
 It can be `string` or `array`. Path relative to `webRoot` configuration.
 Imgen will look for images in this path(s)
 
+
 ##### save_to
 
 Path relative to `webRoot` configuration. Imgen will save processed images in this path.
 The path can contain placeholders which will be replaced with processing parameters.
 Those placeholders are:
 
-* `{m}` - resize mode flag. Read more about modes [here](#modes),
+* `{m}` - resize mode flag. Read more about modes [here](#mode),
 * `{w}` - requested width,
 * `{h}` - requested height,
 * `{f}` - file name without extension,
 * `{e}` - file extension
+
+
+##### mode
+
+Resize mode flag which says in which maner image should be resized. There are few flags available.
+
+* `n` - _none_, resize to the given size, **ignoring** aspect ratio
+* `a` - _auto_ or _fit_, resize the image so that it fits into specified box, keeping aspect ratio,
+* `i` - _inverse_ or _fill_, image will fill the box, but the overflowing part won't be cut, keeps aspect ratio,
+* `c` - _crop_, same as `i`, _fill_, except overflowing part will be cut,
+* `w` - _width_, resize to match the width, keeping aspect ratio,
+* `h` - _height_, resize to match the height, keeping aspect ratio,
+
+##### width
+
+The default width
+
+##### height
+
+The default height
+
+### Image methods
+
+The `Image` class returned by `Imgen::instance()->image()` have few methods that change the default
+resize options and some more.
+
+* `width($width)` - sets `$width` and mode to _width_,
+* `height($height)` - sets `$height` mode to _height_,
+* `size($width, $height)` - sets `$width` and `$height`, do **not** set any mode,
+* `fill($width, $height)` - sets `$width` and `$height` and mode to _fill_,
+* `fit($width, $height)` - sets `$width` and `$height` and mode to _fit_,
+* `crop($width, $height)` - sets `$width` and `$height` and mode to _crop_,
+* `mode($mode)` - sets mode to `$mode`,
+* `attrs($attrs)` - set custom attributes on the `<img />` tag
+* `url()` - by calling this method, only URL will be returned instead of `<img />` tag,
+
+You can read more in the source code.
+
+### Using custom image processing library
+
+With Imgen you can use any image processing library you want. All you need to do is to provide
+an adapter class. Your adapter has to implement `Zatsugami\Imgen\ImageProcessorInterface`,
+but you can also just extend the `Zatsugami\Imgen\ImageProcessor` abstract class.

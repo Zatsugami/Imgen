@@ -108,8 +108,6 @@ class Image {
                 return $path.DIRECTORY_SEPARATOR.$this->filename;
             }
         }
-
-        return $this;
     }
 
     public function getSavePath()
@@ -189,7 +187,14 @@ class Image {
 
     public function __toString()
     {
-        $this->save();
+        try
+        {
+            $this->save();
+        }
+        catch ( \Exception $e )
+        {
+        }
+
         return $this->urlOnly ? $this->getUrl() : $this->getTag();
     }
 

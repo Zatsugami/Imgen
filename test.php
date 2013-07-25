@@ -30,4 +30,5 @@ if ( ! function_exists('image') )
     }
 }
 
+
 echo image('obrazek.jpg', 'Ale obrazek')->crop(400, 300).PHP_EOL;
