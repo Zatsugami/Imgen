@@ -10,7 +10,7 @@ class Intervention extends ImageProcessor {
      *
      * @var \Intervention\Image\Image
      */
-    protected $imgae = null;
+    protected $image = null;
 
     public function __construct()
     {

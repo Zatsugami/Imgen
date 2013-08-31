@@ -9,8 +9,8 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {
-        "intervention/image": "1.4.*"
+    "suggest": {
+        "intervention/image": "Imgen is shipped with a driver for this library"
     },
     "autoload": {
         "psr-0": {
